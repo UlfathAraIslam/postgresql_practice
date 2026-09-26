@@ -12,3 +12,11 @@ INSERT INTO products (name, price_cents, stock_qty, created_at) VALUES
     ('CodeBridge Hoodie',             4500,   0, '2024-02-05 10:00:00+09'),
     ('Mechanical Keyboard',           8999,  15, '2024-02-25 10:00:00+09'),
     ('Desk Lamp',                     2499,  60, '2024-03-10 10:00:00+09');
+
+CREATE TABLE categories (
+    id     SERIAL       PRIMARY KEY,
+    name   VARCHAR(100) NOT NULL
+);
+
+INSERT INTO categories (name) VALUES
+    ('Books'), ('Study Aids'), ('Gear');

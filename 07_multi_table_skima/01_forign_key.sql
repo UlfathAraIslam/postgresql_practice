@@ -20,3 +20,9 @@ CREATE TABLE categories (
 
 INSERT INTO categories (name) VALUES
     ('Books'), ('Study Aids'), ('Gear');
+
+ALTER TABLE products ADD COLUMN category_id INTEGER REFERENCES categories(id);
+
+UPDATE products SET category_id = 1 WHERE id = 1;
+UPDATE products SET category_id = 2 WHERE id = 2;
+UPDATE products SET category_id = 3 WHERE id IN (3, 4, 5);

@@ -42,3 +42,22 @@ INSERT INTO orders (id, user_id,status,created_at) VALUES
     (3, 1, 'pending',   '2024-04-10 09:15:00+09'),
     (4, 4, 'completed', '2024-04-12 14:00:00+09'),
     (5, 6, 'cancelled', '2024-04-15 16:45:00+09');
+
+-- ৩. order_items, একটা order-এর ভেতরে প্রতিটা প্রোডাক্টের জন্য এক row
+
+CREATE TABLE order_items (
+    id                 SERIAL    PRIMARY KEY,
+    order_id           INTEGER   NOT NULL REFERENCES orders(id),
+    product_id         INTEGER   NOT NULL REFERENCES products(id),
+    quantity           INTEGER   NOT NULL DEFAULT 1,
+    unit_price_cents   INTEGER   NOT NULL
+);
+
+INSERT INTO order_items (order_id, product_id, quantity, unit_price_cents) VALUES
+    (1, 1, 1, 1999),
+    (1, 2, 2,  999),
+    (2, 4, 1, 8999),
+    (3, 5, 1, 2499),
+    (4, 1, 1, 1999),
+    (4, 3, 1, 4500),
+    (5, 2, 1,  999);

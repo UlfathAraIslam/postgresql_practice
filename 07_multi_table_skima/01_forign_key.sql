@@ -61,3 +61,17 @@ INSERT INTO order_items (order_id, product_id, quantity, unit_price_cents) VALUE
     (4, 1, 1, 1999),
     (4, 3, 1, 4500),
     (5, 2, 1,  999);
+
+ -- ৪. payments, শুধু যেসব order-এর টাকা দেওয়া হয়েছে সেগুলোর জন্য (pending আর cancelled order-এর payment নেই)
+
+CREATE TABLE payments (
+    id            SERIAL        PRIMARY KEY,
+    order_id      INTEGER       NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+    amount_cents  INTEGER       NOT NULL,
+    paid_at       TIMESTAMPTZ   NOT NULL DEFAULT now()
+);
+
+INSERT INTO payments (order_id, amount_cents, paid_at) VALUES
+    (1, 3997, '2024-04-01 10:05:00+09'),
+    (2, 8999, '2024-04-03 11:35:00+09'),
+    (4, 6499, '2024-04-12 14:05:00+09');
